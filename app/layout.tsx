@@ -1,16 +1,17 @@
-import { ClerkProvider } from "@clerk/nextjs";
-import { dark } from "@clerk/themes";
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
+import { ClerkProvider } from '@clerk/nextjs';
+import { dark } from '@clerk/themes';
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import { Toaster } from 'sonner';
+import './globals.css';
 
-import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeProvider } from '@/components/theme-provider';
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "Verse Fusion",
-  description: "Created by Alan Umirzakov/nocturneFlow",
+  title: 'Verse Fusion',
+  description: 'Created by Alan Umirzakov/nocturneFlow',
 };
 
 export default function RootLayout({
@@ -27,6 +28,7 @@ export default function RootLayout({
             forcedTheme="dark"
             storageKey="verse-fusion"
           >
+            <Toaster theme="light" position="bottom-center" />
             {children}
           </ThemeProvider>
         </body>
