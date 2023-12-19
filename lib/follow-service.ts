@@ -1,5 +1,5 @@
-import { db } from './db';
-import { getSelf } from './auth-service';
+import { db } from "./db";
+import { getSelf } from "./auth-service";
 
 export const getFollowedUsers = async () => {
   try {
@@ -36,7 +36,7 @@ export const isFollowingUser = async (id: string) => {
     });
 
     if (!otherUser) {
-      throw new Error('User not found');
+      throw new Error("User not found");
     }
 
     if (otherUser.id === self.id) {
@@ -63,7 +63,7 @@ export const followUser = async (id: string) => {
   });
 
   if (!otherUser) {
-    throw new Error('User not found');
+    throw new Error("User not found");
   }
 
   if (otherUser.id === self.id) {
@@ -78,7 +78,7 @@ export const followUser = async (id: string) => {
   });
 
   if (existingFollow) {
-    throw new Error('Already following');
+    throw new Error("Already following");
   }
 
   const follow = await db.follow.create({
@@ -88,7 +88,7 @@ export const followUser = async (id: string) => {
     },
     include: {
       following: true,
-      follow: true,
+      follower: true,
     },
   });
 
@@ -105,7 +105,7 @@ export const unfollowUser = async (id: string) => {
   });
 
   if (!otherUser) {
-    throw new Error('User not found');
+    throw new Error("User not found");
   }
 
   if (otherUser.id === self.id) {
@@ -120,7 +120,7 @@ export const unfollowUser = async (id: string) => {
   });
 
   if (!existingFollow) {
-    throw new Error('Not following');
+    throw new Error("Not following");
   }
 
   const follow = await db.follow.delete({
