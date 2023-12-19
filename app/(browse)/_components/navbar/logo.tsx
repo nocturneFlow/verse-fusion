@@ -1,6 +1,7 @@
+import Link from "next/link";
 import Image from "next/image";
 import { Poppins } from "next/font/google";
-import Link from "next/link";
+
 import { cn } from "@/lib/utils";
 
 const font = Poppins({
@@ -22,7 +23,7 @@ export const Logo = () => {
         </div>
         <div className={cn("hidden lg:block", font.className)}>
           <p className="text-lg font-semibold">Verse Fusion</p>
-          <p className="text-xs text-muted-foreground">Multiverse Experience</p>
+          <p className="text-xs text-muted-foreground">Multiverse experience</p>
         </div>
       </div>
     </Link>

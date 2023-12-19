@@ -5,7 +5,6 @@ import { useMediaQuery } from "usehooks-ts";
 
 import { cn } from "@/lib/utils";
 import { useSidebar } from "@/store/use-sidebar";
-import { stat } from "fs";
 
 interface ContainerProps {
   children: React.ReactNode;
@@ -21,7 +20,7 @@ export const Container = ({ children }: ContainerProps) => {
     } else {
       onExpand();
     }
-  }, [matches]);
+  }, [matches, onCollapse, onExpand]);
 
   return (
     <div
