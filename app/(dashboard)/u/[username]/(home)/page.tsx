@@ -1,6 +1,7 @@
-import { StreamPlayer } from "@/components/stream-player";
-import { getUserByUsername } from "@/lib/user-service";
 import { currentUser } from "@clerk/nextjs";
+
+import { getUserByUsername } from "@/lib/user-service";
+import { StreamPlayer } from "@/components/stream-player";
 
 interface CreatorPageProps {
   params: {
@@ -17,7 +18,7 @@ const CreatorPage = async ({ params }: CreatorPageProps) => {
   }
 
   return (
-    <div h-full>
+    <div className="h-full">
       <StreamPlayer user={user} stream={user.stream} isFollowing />
     </div>
   );
