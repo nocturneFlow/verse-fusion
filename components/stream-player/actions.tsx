@@ -3,7 +3,7 @@
 import { toast } from "sonner";
 import { Heart } from "lucide-react";
 import { useTransition } from "react";
-import { useAuth } from "@clerk/nextjs";
+import { useAuth } from "@/lib/auth";
 import { useRouter } from "next/navigation";
 
 import { cn } from "@/lib/utils";
@@ -15,7 +15,7 @@ interface ActionsProps {
   hostIdentity: string;
   isFollowing: boolean;
   isHost: boolean;
-};
+}
 
 export const Actions = ({
   hostIdentity,
@@ -24,26 +24,30 @@ export const Actions = ({
 }: ActionsProps) => {
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
-  const { userId } = useAuth();
+  const user = useAuth();
 
   const handleFollow = () => {
     startTransition(() => {
       onFollow(hostIdentity)
-        .then((data) => toast.success(`You are now following ${data.following.username}`))
-        .catch(() => toast.error("Something went wrong"))
+        .then((data) =>
+          toast.success(`You are now following ${data.following.username}`)
+        )
+        .catch(() => toast.error("Something went wrong"));
     });
-  }
+  };
 
   const handleUnfollow = () => {
     startTransition(() => {
       onUnfollow(hostIdentity)
-        .then((data) => toast.success(`You have unfollowed ${data.following.username}`))
-        .catch(() => toast.error("Something went wrong"))
+        .then((data) =>
+          toast.success(`You have unfollowed ${data.following.username}`)
+        )
+        .catch(() => toast.error("Something went wrong"));
     });
-  }
+  };
 
   const toggleFollow = () => {
-    if (!userId) {
+    if (!user) {
       return router.push("/sign-in");
     }
 
@@ -54,7 +58,7 @@ export const Actions = ({
     } else {
       handleFollow();
     }
-  }
+  };
 
   return (
     <Button
@@ -64,22 +68,14 @@ export const Actions = ({
       size="sm"
       className="w-full lg:w-auto"
     >
-      <Heart className={cn(
-        "h-4 w-4 mr-2",
-        isFollowing
-          ? "fill-white"
-          : "fill-none"
-      )} />
-      {isFollowing
-        ? "Unfollow"
-        : "Follow"
-      }
+      <Heart
+        className={cn("h-4 w-4 mr-2", isFollowing ? "fill-white" : "fill-none")}
+      />
+      {isFollowing ? "Unfollow" : "Follow"}
     </Button>
-  )
+  );
 };
 
 export const ActionsSkeleton = () => {
-  return (
-    <Skeleton className="h-10 w-full lg:w-24" />
-  );
+  return <Skeleton className="h-10 w-full lg:w-24" />;
 };

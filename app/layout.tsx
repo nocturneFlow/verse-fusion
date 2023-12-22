@@ -1,11 +1,11 @@
-import { ClerkProvider } from "@clerk/nextjs";
-import { dark } from "@clerk/themes";
 import type { Metadata } from "next";
 import { Inter, Noto_Sans, Poppins, Rubik } from "next/font/google";
 import { Toaster } from "sonner";
 import "./globals.css";
 
 import { ThemeProvider } from "@/components/theme-provider";
+import { SessionProvider } from "next-auth/react";
+import { auth } from "@/next-auth";
 
 const noto_sans = Noto_Sans({ subsets: ["latin-ext"] });
 
@@ -14,15 +14,17 @@ export const metadata: Metadata = {
   description: "Created by Alan Umirzakov/nocturneFlow",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const session = await auth();
+
   return (
-    <ClerkProvider appearance={{ baseTheme: dark }}>
-      <html lang="en">
-        <body className={noto_sans.className}>
+    <html lang="en">
+      <body className={noto_sans.className}>
+        <SessionProvider session={session}>
           <ThemeProvider
             attribute="class"
             forcedTheme="dark"
@@ -31,8 +33,8 @@ export default function RootLayout({
             <Toaster theme="light" position="bottom-center" />
             {children}
           </ThemeProvider>
-        </body>
-      </html>
-    </ClerkProvider>
+        </SessionProvider>
+      </body>
+    </html>
   );
 }
