@@ -53,7 +53,6 @@ model Stream {
   @@fulltext([name])
 }
 
-
 model Follow {
   id String @id @default(uuid())
   followerId String

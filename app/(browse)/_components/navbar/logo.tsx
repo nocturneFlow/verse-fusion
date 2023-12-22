@@ -1,10 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Poppins } from "next/font/google";
+import { Noto_Sans, Poppins } from "next/font/google";
 
 import { cn } from "@/lib/utils";
 
-const font = Poppins({
+const font = Noto_Sans({
   subsets: ["latin"],
   weight: ["200", "300", "400", "500", "600", "700", "800"],
 });
