@@ -1,17 +1,17 @@
-import { ClerkProvider } from '@clerk/nextjs';
-import { dark } from '@clerk/themes';
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import { Toaster } from 'sonner';
-import './globals.css';
+import { ClerkProvider } from "@clerk/nextjs";
+import { dark } from "@clerk/themes";
+import type { Metadata } from "next";
+import { Inter, Noto_Sans, Poppins, Rubik } from "next/font/google";
+import { Toaster } from "sonner";
+import "./globals.css";
 
-import { ThemeProvider } from '@/components/theme-provider';
+import { ThemeProvider } from "@/components/theme-provider";
 
-const inter = Inter({ subsets: ['latin'] });
+const noto_sans = Noto_Sans({ subsets: ["latin-ext"] });
 
 export const metadata: Metadata = {
-  title: 'Verse Fusion',
-  description: 'Created by Alan Umirzakov/nocturneFlow',
+  title: "Verse Fusion",
+  description: "Created by Alan Umirzakov/nocturneFlow",
 };
 
 export default function RootLayout({
@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <ClerkProvider appearance={{ baseTheme: dark }}>
       <html lang="en">
-        <body className={inter.className}>
+        <body className={noto_sans.className}>
           <ThemeProvider
             attribute="class"
             forcedTheme="dark"

@@ -1,13 +1,14 @@
 "use client";
 
 import { ConnectionState, Track } from "livekit-client";
-import {
+import { 
   useConnectionState,
   useRemoteParticipant,
   useTracks,
-} from "@livekit/components-react";
+} from "@livekit/components-react"
 
 import { Skeleton } from "@/components/ui/skeleton";
+
 import { OfflineVideo } from "./offline-video";
 import { LoadingVideo } from "./loading-video";
 import { LiveVideo } from "./live-video";
@@ -15,9 +16,12 @@ import { LiveVideo } from "./live-video";
 interface VideoProps {
   hostName: string;
   hostIdentity: string;
-}
+};
 
-export const Video = ({ hostName, hostIdentity }: VideoProps) => {
+export const Video = ({
+  hostName,
+  hostIdentity,
+}: VideoProps) => {
   const connectionState = useConnectionState();
   const participant = useRemoteParticipant(hostIdentity);
   const tracks = useTracks([
@@ -28,26 +32,18 @@ export const Video = ({ hostName, hostIdentity }: VideoProps) => {
   let content;
 
   if (!participant && connectionState === ConnectionState.Connected) {
-    content = (
-      <p>
-        <OfflineVideo username={hostName} />
-      </p>
-    );
+    content = <OfflineVideo username={hostName} />;
   } else if (!participant || tracks.length === 0) {
-    content = (
-      <p>
-        <LoadingVideo label={connectionState} />
-      </p>
-    );
+    content = <LoadingVideo label={connectionState} />
   } else {
-    content = (
-      <p>
-        <LiveVideo participant={participant} />
-      </p>
-    );
-  }
+    content = <LiveVideo participant={participant} />
+  };
 
-  return <div className="aspect-video border-b group relative">{content}</div>;
+  return (
+    <div className="aspect-video border-b group relative">
+      {content}
+    </div>
+  );
 };
 
 export const VideoSkeleton = () => {
