@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter, Noto_Sans, Poppins, Rubik } from "next/font/google";
 import { Toaster } from "sonner";
 import "./globals.css";
-
 import { ThemeProvider } from "@/components/theme-provider";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@/next-auth";
